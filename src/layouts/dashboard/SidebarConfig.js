@@ -27,15 +27,20 @@ const sidebarConfig = [
     subheader: "general",
     items: [
       {
-        title: "One",
-        path: PATH_DASHBOARD.general.pageOne,
+        title: "post",
+        path: PATH_DASHBOARD.general.post,
         icon: ICONS.dashboard,
       },
       {
-        title: "Three",
-        path: PATH_DASHBOARD.general.pageThree,
+        title: "page",
+        path: PATH_DASHBOARD.general.page,
         icon: ICONS.analytics,
       },
+      {
+        title: "media",
+        path: PATH_DASHBOARD.general.media,
+        icon: ICONS.analytics,
+      }
     ],
   },
   
@@ -45,7 +50,17 @@ const sidebarConfig = [
     subheader: "management",
     items: [
       {
-        title: "Blog",
+        title: "Users",
+        path: PATH_DASHBOARD.general.posts,
+        icon: ICONS.user,
+          children: [
+            { title: "Post", path: PATH_DASHBOARD.general.newpost },
+            { title: "Edit Post", path: "#" },
+            { title: "Six", path: "#" },
+          ]
+      },
+      {
+        title: "form",
         path: PATH_DASHBOARD.general.posts,
         icon: ICONS.posts,
           children: [
@@ -54,16 +69,6 @@ const sidebarConfig = [
             { title: "Six", path: "#" },
           ]
       },
-      // {
-      //   title: "user",
-      //   path: PATH_DASHBOARD.app.root,
-      //   icon: ICONS.user,
-      //   children: [
-      //     { title: "Four", path: "#" },
-      //     { title: "Five", path: "#" },
-      //     { title: "Six", path: "#" },
-      //   ],
-      // },
     ],
   },
 ];
