@@ -18,7 +18,7 @@ import {
 // components
 import MenuPopover from '../../components/MenuPopover';
 import { MIconButton } from '../../components/@material-extend';
-import { useAuth } from 'src/db/auth';
+// import { useAuth } from 'src/db/auth';
 
 // ----------------------------------------------------------------------
 
@@ -31,8 +31,8 @@ const MENU_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function AccountPopover({myData}) {
-  const { signOut } = useAuth()
+export default function AccountPopover({myData}:{myData:any}) {
+  // const { signOut } = useAuth()
   const anchorRef = useRef(null);
 
   const [open, setOpen] = useState(false);
@@ -61,7 +61,7 @@ export default function AccountPopover({myData}) {
               height: '100%',
               borderRadius: '50%',
               position: 'absolute',
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
+              bgcolor: (theme: { palette: { grey: string[]; }; }) => alpha(theme.palette.grey[900], 0.72),
             },
           }),
         }}
@@ -111,7 +111,8 @@ export default function AccountPopover({myData}) {
         ))}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button fullWidth color='inherit' variant='outlined' onClick={signOut}>
+          {/* <Button fullWidth color='inherit' variant='outlined' onClick={signOut}> */}
+          <Button fullWidth color='inherit' variant='outlined'>
             Logout
           </Button>
         </Box>

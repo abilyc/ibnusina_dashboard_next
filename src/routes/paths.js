@@ -15,7 +15,7 @@ const PATH_DASHBOARD = {
     posts: path(ROOTS_DASHBOARD, "/posts"),
     pageThree: path(ROOTS_DASHBOARD, "/three"),
     newpost: path(ROOTS_DASHBOARD, "/newpost"),
-    pageFive: path(ROOTS_DASHBOARD, "/five"),
+    pageFive: path(ROOTS_DASHBOARD, "/app/five"),
     pageSix: path(ROOTS_DASHBOARD, "/six"),
   }
 };

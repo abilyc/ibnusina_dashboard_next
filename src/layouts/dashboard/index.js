@@ -7,7 +7,7 @@ import useCollapseDrawer from '../../hooks/useCollapseDrawer';
 //
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
-import { useAuth } from 'src/db/auth';
+// import { useAuth } from 'src/db/auth';
 
 // ----------------------------------------------------------------------
 
@@ -43,15 +43,16 @@ export default function DashboardLayout({ children }) {
   const theme = useTheme();
   const { collapseClick } = useCollapseDrawer();
   const [open, setOpen] = useState(false);
-  const { myData } = useAuth();
+  // const { myData } = useAuth();
 
   return (
     <RootStyle>
-      <DashboardNavbar onOpenSidebar={() => setOpen(true)} myData={myData}/>
+      {/* <DashboardNavbar onOpenSidebar={() => setOpen(true)} myData={myData}/> */}
+      <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
       <DashboardSidebar
         isOpenSidebar={open}
         onCloseSidebar={() => setOpen(false)}
-        myData={myData}
+        // myData={myData}
       />
       <MainStyle
         sx={{
