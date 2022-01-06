@@ -26,7 +26,7 @@ import ThemePrimaryColor from 'src/components/ThemePrimaryColor';
 // import { AuthProvider } from '../src/db/auth';
 import { SnackbarProvider } from 'notistack';
 
-import { SessionProvider } from 'next-auth/react'
+import { SessionProvider } from 'next-auth/react';
 
 // ----------------------------------------------------------------------
 const clientSideEmotionCache = createEmotionCache();

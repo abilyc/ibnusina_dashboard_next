@@ -18,6 +18,7 @@ import {
 // components
 import MenuPopover from '../../components/MenuPopover';
 import { MIconButton } from '../../components/@material-extend';
+import { signOut } from "next-auth/react"
 // import { useAuth } from 'src/db/auth';
 
 // ----------------------------------------------------------------------
@@ -112,7 +113,7 @@ export default function AccountPopover({myData}:{myData:any}) {
 
         <Box sx={{ p: 2, pt: 1.5 }}>
           {/* <Button fullWidth color='inherit' variant='outlined' onClick={signOut}> */}
-          <Button fullWidth color='inherit' variant='outlined'>
+          <Button fullWidth color='inherit' variant='outlined' onClick={() => signOut({ callbackUrl: '/' })}>
             Logout
           </Button>
         </Box>

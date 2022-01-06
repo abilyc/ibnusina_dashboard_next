@@ -1,21 +1,21 @@
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 import { useState } from 'react';
 import { useSnackbar } from 'notistack';
 // import {link as RouterLink} from 'next/link';
 // import { Link as RouterLink } from 'react-router-dom';
-import { useFormik, Form, FormikProvider} from 'formik';
+// import { useFormik, Form, FormikProvider} from 'formik';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import closeFill from '@iconify/icons-eva/close-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
 // material
 import { Link, Stack, Alert, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+// import { LoadingButton } from '@mui/lab';
 // routes
 // import { PATH_AUTH } from '../../../routes/paths';
 // hooks
 // import useAuth from '../../../hooks/useAuth';
-import { useAuth } from 'src/db/auth'
+// import { useAuth } from 'src/db/auth'
 import useIsMountedRef from '../../hooks/useIsMountedRef';
 //
 import { MIconButton } from '../@material-extend';
@@ -23,15 +23,15 @@ import { MIconButton } from '../@material-extend';
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
-  const { signIn } = useAuth();
+  // const { signIn } = useAuth();
   const isMountedRef = useIsMountedRef();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
 
-  const LoginSchema = Yup.object().shape({
-    email: Yup.string().label('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
-  });
+  // const LoginSchema = Yup.object().shape({
+  //   email: Yup.string().label('Email must be a valid email address').required('Email is required'),
+  //   password: Yup.string().required('Password is required')
+  // });
 
 
   const formik = useFormik({
@@ -73,8 +73,7 @@ export default function LoginForm() {
   };
 
   return (
-    <FormikProvider value={formik}>
-     {/* <FormikProvider value={'formik'}> */}
+     <>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
           {errors.afterSubmit && <Alert severity="error">{errors.afterSubmit}</Alert>}
@@ -120,10 +119,10 @@ export default function LoginForm() {
           </Link> */}
         </Stack>
 
-        <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+        <div>
           Login
-        </LoadingButton>
+        </div>
       </Form>
-    </FormikProvider>
+      </>
   );
 }

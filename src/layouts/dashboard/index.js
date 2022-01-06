@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 // material
 import { styled, useTheme } from '@mui/material/styles';
 // hooks
@@ -7,6 +8,7 @@ import useCollapseDrawer from '../../hooks/useCollapseDrawer';
 //
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
+import {Login} from '../../components/login'
 // import { useAuth } from 'src/db/auth';
 
 // ----------------------------------------------------------------------
@@ -43,16 +45,19 @@ export default function DashboardLayout({ children }) {
   const theme = useTheme();
   const { collapseClick } = useCollapseDrawer();
   const [open, setOpen] = useState(false);
+  const { data: session, status } = useSession();
+  if (status === "loading") return <div>tunggu sedang memuat</div>
+  if (!session) return <Login/>
   // const { myData } = useAuth();
 
   return (
     <RootStyle>
-      {/* <DashboardNavbar onOpenSidebar={() => setOpen(true)} myData={myData}/> */}
-      <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
+      <DashboardNavbar onOpenSidebar={() => setOpen(true)} myData={session}/>
+      {/* <DashboardNavbar onOpenSidebar={() => setOpen(true)} /> */}
       <DashboardSidebar
         isOpenSidebar={open}
         onCloseSidebar={() => setOpen(false)}
-        // myData={myData}
+        myData={session}
       />
       <MainStyle
         sx={{
