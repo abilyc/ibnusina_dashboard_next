@@ -13,9 +13,11 @@ export default function PageOne() {
 
   return (
     <DashboardLayout>
-      <Page title='Post | Ibnu Sina'>
+      <Page title='Page One | Minimal-UI'>
         <Container maxWidth={themeStretch ? false : 'xl'}>
-          hello
+          <Typography variant='h3' component='h1' paragraph>
+            Tambahkan pengguna
+          </Typography>
         </Container>
       </Page>
     </DashboardLayout>

@@ -18,6 +18,7 @@ const ICONS = {
   analytics: getIcon("ic_analytics"),
   dashboard: getIcon("ic_dashboard"),
   posts: getIcon("ic_blog"),
+  forms: getIcon("ic_analytics")
 };
 
 const sidebarConfig = [
@@ -51,24 +52,22 @@ const sidebarConfig = [
     items: [
       {
         title: "Users",
-        path: PATH_DASHBOARD.general.posts,
+        path: PATH_DASHBOARD.users.root,
         icon: ICONS.user,
           children: [
-            { title: "Post", path: PATH_DASHBOARD.general.newpost },
-            { title: "Edit Post", path: "#" },
-            { title: "Six", path: "#" },
+            { title: "All User", path: PATH_DASHBOARD.users.allUsers },
+            { title: "New User", path: PATH_DASHBOARD.users.newUser },
           ]
       },
-      {
-        title: "form",
-        path: PATH_DASHBOARD.general.posts,
-        icon: ICONS.posts,
-          children: [
-            { title: "Post", path: PATH_DASHBOARD.general.newpost },
-            { title: "Edit Post", path: "#" },
-            { title: "Six", path: "#" },
-          ]
-      },
+      // {
+      //   title: "Forms",
+      //   path: PATH_DASHBOARD.management.forms,
+      //   icon: ICONS.forms,
+      //     children: [
+      //       { title: "data", path: PATH_DASHBOARD.management.forms },
+      //       { title: "new form", path: PATH_DASHBOARD.management.newForm},
+      //     ]
+      // },
     ],
   },
 ];
