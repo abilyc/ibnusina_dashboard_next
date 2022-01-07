@@ -24,10 +24,10 @@ import Page from 'src/components/Page';
 export default function PageThree() {
   const { themeStretch } = useSettings();
   // const [quillContent, setQuillContent] = useState('');
-  const [draftContent, setDraftContent] = useState(() =>
+  // const [draftContent, setDraftContent] = useState(() =>
     // EditorState.createEmpty()
-    console.log('hello')
-  );
+  //   console.log('hello')
+  // );
 
   return (
     <DashboardLayout>

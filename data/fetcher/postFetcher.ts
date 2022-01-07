@@ -1,6 +1,7 @@
 import { GraphQLClient } from 'graphql-request';
-import { postList, postContent, } from '../query';
-const url = process.env.GRAPH_URL!;
+import { postList, postContent, postListAll } from '../query';
+// const url = process.env.GRAPH_URL!;
+const url = process.env.NEXT_PUBLIC_GRAPH_URL!;
 
 export async function fetchPostList() {
   const headers = {
@@ -8,6 +9,16 @@ export async function fetchPostList() {
   }
   const client = new GraphQLClient(url, { headers });
   const res = await client.request(postList);
+  return res;
+}
+export async function fetchPostListAll(token: string, published: number, timeStamp: string) {
+  console.log('hi dari fetchPostListAll');
+  const headers = {
+    Authorization: token
+  }
+  const client = new GraphQLClient(url);
+  const res = await client.request(postListAll, {published, timeStamp}, headers);
+  // console.log('dari fetchpost list', res);
   return res;
 }
 export async function fetchPostContent(slug: String) {

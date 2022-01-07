@@ -1,0 +1,31 @@
+import { gql } from 'graphql-request';
+
+// Menampilkan semua postingan, terbit atau pun yang belum terbit 
+const postListAll = gql`
+query allPosts($published:Int!, $timeStamp:String){
+  allPosts(published:$published timeStamp:$timeStamp){
+    nextPost
+    postResult{
+      id
+      title
+      createdAt
+      slug
+      imageUrl
+      category{
+        id
+        title
+      }
+      tag{
+        id
+        title
+      }
+      author{
+        callName
+        avatar
+      }
+    }
+  }
+}
+  `;
+
+export default postListAll;

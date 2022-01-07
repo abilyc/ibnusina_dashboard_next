@@ -5,7 +5,8 @@ import getComment from './getComment';
 import addComment from './addComment';
 import editComment from './editComment';
 import deleteComment from './deleteComment';
-import actionToPost from './actionToPost'
+import actionToPost from './actionToPost';
+import postListAll from './postListAll';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -13,9 +14,10 @@ const headers = {
     'authorization': 'Bearear token'
   };
 
-const url = process.env.NEXT_PUBLIC_GRAPH_URL;
+const url = process.env.NEXT_PUBLIC_GRAPH_URL!;
 export {
     postList, 
+    postListAll,
     postContent, 
     metaPost,
     getComment,  
