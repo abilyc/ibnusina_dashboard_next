@@ -11,6 +11,7 @@ query allPosts($published:Int!, $timeStamp:String){
       createdAt
       slug
       imageUrl
+      published
       category{
         id
         title

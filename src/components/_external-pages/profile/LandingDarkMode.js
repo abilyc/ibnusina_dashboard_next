@@ -6,7 +6,7 @@ import { Box, Grid, Collapse, Container, Typography, Divider, Button, Card, Card
 import { varFadeInUp, varFadeInLeft, MotionInView } from '../../animate';
 import { useMediaQuery } from '@mui/material';
 import { useState } from 'react';
-
+import Image from 'next/image';
 //https://github.com/reduxjs/redux-toolkit.git
 // ----------------------------------------------------------------------
 
@@ -186,7 +186,7 @@ const CardsMedia = ({data, spacing=7}) => (
   <Grid container spacing={spacing}>
     {
       dataKegiatan[data].map(v=>(
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={6} key={v.title}>
           <Card>
             <CardHeader 
               title={v.title}

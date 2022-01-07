@@ -21,15 +21,11 @@ import {
   Typography,
   Stack
 } from '@mui/material';
-// utils
-// import { fCurrency } from 'src/utils/formatNumber';
-// _mock_
-// import { _appInvoices } from '../../../../_mock';
-// components
 import Label from 'src/components/Label';
 import Iconify from 'src/components/Iconify';
 import Scrollbar from 'src/components/Scrollbar';
 import MenuPopover from 'src/components/MenuPopover';
+import { PostList } from 'types/post';
 
 const _appInvoices = [...Array(5)].map((_, index) => ({
   id: `${Date.now() + index}`,
@@ -55,9 +51,17 @@ const ItemIconStyle = styled(Iconify)(({ theme }) => ({
   color: theme.palette.text.disabled,
 }));
 
-export default function PostTable() {
+function convertToString(arr:any){
+  const x = arr.map((a: { title: string; }) => " "+ a.title);
+  return x.toString();
+}
+// export default function PostTable(dataPost:{dataPost:PostList | undefined}) {
+export default function PostTable({ dataPost }: { dataPost: PostList}) {
   const theme = useTheme();
-
+  const arrayPost = dataPost?.postResult!;
+  // console.log(arrayPost);
+  // console.log(dataPost?.nextPost);
+  // const {nextPost:any} = dataPost;
   return (
     <Card>
       <CardHeader title="Post" sx={{ mb: 3 }} />
@@ -75,38 +79,38 @@ export default function PostTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {_appInvoices.map((row) => (
+              {arrayPost.map((row) => (
                 <>
-                <TableRow key={row.id}>
-                  {/* <TableCell>{`INV-${row.id}`}</TableCell> */}
-                  <TableCell>
-                    <ItemBlockStyle sx={{ minWidth: 120 }}>
-                      <Image disabledEffect ratio={undefined} alt={'amir'} src='https://minimal-assets-api.vercel.app/assets/icons/ic_flag_us.svg' sx={{ width: 28, mr: 1 }} />
-                      <Typography variant="subtitle2">{row.title}</Typography>
-                    </ItemBlockStyle>
-                  </TableCell>
-                  <TableCell>{row.author}</TableCell>
-                  <TableCell>{row.category}</TableCell>
-                  {/* <TableCell>{fCurrency(row.price)}</TableCell> */}
-                  <TableCell>{row.tag}</TableCell>
-                  <TableCell>
-                    <Label
-                      variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                      color={
-                        (row.status === 'draft' && 'warning') ||
-                        (row.status === 'undefined' && 'error') ||
-                        'success'
-                      }
-                    >
-                      {sentenceCase(row.status)}
-                    </Label>
-                  </TableCell>
-                  
-                  <TableCell align="right">
-                    <MoreMenuButton />
-                  </TableCell>
-                </TableRow>
-                  <Box sx={{ margin: 1 }}>
+                  <TableRow key={row.id}>
+                    {/* <TableCell>{`INV-${row.id}`}</TableCell> */}
+                    <TableCell>
+                      <ItemBlockStyle sx={{ minWidth: 120 }}>
+                        <Image disabledEffect ratio={undefined} alt={'amir'} src='https://minimal-assets-api.vercel.app/assets/icons/ic_flag_us.svg' sx={{ width: 28, mr: 1 }} />
+                        <Typography variant="subtitle2">{row.title}</Typography>
+                      </ItemBlockStyle>
+                    </TableCell>
+                    <TableCell>{row.author.callName}</TableCell>
+                    <TableCell>{convertToString(row.category)}</TableCell>
+                    {/* <TableCell>{fCurrency(row.price)}</TableCell> */}
+                    <TableCell>{convertToString(row.tag)}</TableCell>
+                    <TableCell>
+                      <Label
+                        variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
+                        color={
+                          (row.published === 1 && 'warning') ||
+                          (row.published === 3 && 'error') ||
+                          'success'
+                        }
+                      >
+                        {row.published===2 ? 'terbit': 'draft'}
+                      </Label>
+                    </TableCell>
+
+                    <TableCell align="right">
+                      <MoreMenuButton />
+                    </TableCell>
+                  </TableRow>
+                  {/* <Box sx={{ margin: 1 }}>
                     <Table size="small" aria-label="purchases">
                       <TableHead>
                         <TableRow>
@@ -117,8 +121,8 @@ export default function PostTable() {
                         </TableRow>
                       </TableHead>
                     </Table>
-                  </Box>
-              </>
+                  </Box> */}
+                </>
               ))}
             </TableBody>
           </Table>

@@ -2,7 +2,8 @@ import { styled } from '@mui/material/styles';
 import { Box, Card, Stack, Container, Typography, Button } from '@mui/material';
 import Page from '../../components/Page';
 import { MHidden } from '../../components/@material-extend';
-import { signIn } from "next-auth/react"
+import { signIn } from "next-auth/react";
+import Image from 'next/image'
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
@@ -42,7 +43,7 @@ export default function Login() {
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
             Hi, Selamat Datang
           </Typography>
-          <img src="/static/illustrations/illustration_login.png" alt="login" />
+          <Image src="/static/illustrations/illustration_login.png" alt="login" width={400} height={400}/>
         </SectionStyle>
       </MHidden>
 

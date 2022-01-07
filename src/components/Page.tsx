@@ -7,6 +7,7 @@ import { FC } from 'react';
 
 // ----------------------------------------------------------------------
 
+// eslint-disable-next-line react/display-name
 const Page: FC<any> = forwardRef(({ children, title = '', ...other }, ref) => (
   <Box ref={ref} {...other}>
     <Head>

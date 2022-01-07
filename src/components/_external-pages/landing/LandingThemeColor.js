@@ -2,6 +2,7 @@ import { capitalCase } from 'change-case';
 import { motion } from 'framer-motion';
 // material
 import { styled, alpha } from '@mui/material/styles';
+import Image from 'next/image';
 import {
   Box,
   Stack,
@@ -163,7 +164,7 @@ export default function LandingThemeColor() {
 
           <Box sx={{ position: 'absolute', top: 0 }}>
             <MotionInView variants={varFadeInUp}>
-              <img
+              <Image
                 alt='screen'
                 src={`/static/home/theme-color/screen-${themeColor}.png`}
               />
@@ -176,7 +177,7 @@ export default function LandingThemeColor() {
                 animate={{ y: [0, -20, 0] }}
                 transition={{ duration: 8, repeat: Infinity }}
               >
-                <img
+                <Image
                   alt='sidebar'
                   src={`/static/home/theme-color/block1-${themeColor}.png`}
                 />
@@ -190,7 +191,7 @@ export default function LandingThemeColor() {
                 animate={{ y: [-10, 10, -10] }}
                 transition={{ duration: 8, repeat: Infinity }}
               >
-                <img
+                <Image
                   alt='sidebar'
                   src={`/static/home/theme-color/block2-${themeColor}.png`}
                 />
@@ -204,7 +205,7 @@ export default function LandingThemeColor() {
                 animate={{ y: [-25, 5, -25] }}
                 transition={{ duration: 10, repeat: Infinity }}
               >
-                <img
+                <Image
                   alt='sidebar'
                   src={`/static/home/theme-color/sidebar-${themeColor}.png`}
                 />

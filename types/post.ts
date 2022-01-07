@@ -13,12 +13,13 @@ export interface Session {
 }
 
 export interface PostList {
-    nextPost: string
+    nextPost: string | undefined
     postResult: {
         id: string
         title: string
         createdAt: string
         slug: string
+        published: number
         imageUrl: string
         author: {
             callName: string
@@ -26,5 +27,5 @@ export interface PostList {
         }
         category: string[]
         tag:string[]
-    }
+    }[] | undefined
 }

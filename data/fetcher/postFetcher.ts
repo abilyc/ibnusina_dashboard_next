@@ -19,6 +19,7 @@ export async function fetchPostListAll(token: string, published: number, timeSta
   const client = new GraphQLClient(url);
   const res = await client.request(postListAll, {published, timeStamp}, headers);
   // console.log('dari fetchpost list', res);
+  // console.log('ini', res);
   return res;
 }
 export async function fetchPostContent(slug: String) {

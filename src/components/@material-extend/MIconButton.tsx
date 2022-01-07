@@ -8,6 +8,7 @@ import { ButtonAnimate } from '../animate';
 
 // ----------------------------------------------------------------------
 
+// eslint-disable-next-line react/display-name
 const MIconButton: FC<any> = forwardRef(({ children, ...other }, ref) => (
   <ButtonAnimate sx={undefined}>
     <IconButton ref={ref} {...other}>

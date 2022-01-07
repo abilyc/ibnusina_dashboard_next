@@ -34,3 +34,8 @@ SERVER BUILD
 -[handle error getstaticprops](https://stackoverflow.com/questions/67168743/how-to-cleanly-handle-errors-in-nextjs-getstaticprops)
 
 - [absolute url path](https://stackoverflow.com/questions/44342226/next-js-error-only-absolute-urls-are-supported)
+
+
+ESLINT
+
+- [error display name](https://stackoverflow.com/questions/55620562/eslint-component-definition-is-missing-displayname-react-display-name)

@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import { Box, Grid, Container, Typography } from '@mui/material';
 //
 import { MotionInView, varFadeInUp, varFadeInDown } from '../../animate';
-
+import Image from 'next/image'
 // ----------------------------------------------------------------------
 
 const RootStyle = styled('div')(({ theme }) => ({
@@ -81,14 +81,14 @@ export default function LandingDarkMode() {
 
           <Grid item xs={12} md={7} sx={{ position: 'relative' }}>
             <MotionInView threshold={0.5} variants={varFadeInUp}>
-              <img alt='light mode' src='/static/home/lightmode.png' />
+              <Image alt='light mode' src='/static/home/lightmode.png' />
             </MotionInView>
             <MotionInView
               threshold={0.5}
               variants={varFadeInDown}
               sx={{ top: 0, left: 0, position: 'absolute' }}
             >
-              <img alt='dark mode' src='/static/home/darkmode.png' />
+              <Image alt='dark mode' src='/static/home/darkmode.png' />
             </MotionInView>
           </Grid>
         </Grid>

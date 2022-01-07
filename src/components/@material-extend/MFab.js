@@ -8,6 +8,7 @@ import { ButtonAnimate } from '../animate';
 
 // ----------------------------------------------------------------------
 
+// eslint-disable-next-line react/display-name
 const MFab = forwardRef(
   ({ color = 'primary', children, sx, ...other }, ref) => {
     const theme = useTheme();

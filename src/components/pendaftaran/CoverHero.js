@@ -141,7 +141,7 @@ export default function CoverHero() {
             </Stack> */}
             <motion.div variants={varFadeIn}>
                 <Button variant='contained' sx={{padding: 0}}>
-                    <a href='https://forms.gle/wBdm89C4fEGncBic7' target='_blank' style={{textDecoration: 'none', color: 'white', display: 'block', width: '100%', height: '100%', margin: '5px'}}>Daftar</a>
+                    <a href='https://forms.gle/wBdm89C4fEGncBic7' target='_blank' rel="noreferrer" style={{textDecoration: 'none', color: 'white', display: 'block', width: '100%', height: '100%', margin: '5px'}}>Daftar</a>
                 </Button>
             </motion.div>
           </ContentStyle>

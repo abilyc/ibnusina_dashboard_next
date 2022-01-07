@@ -3,8 +3,10 @@ import { NextApiRequest, NextApiResponse } from 'next'
 
 const secret = process.env.JWT_SECRET!
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const x = async (req: NextApiRequest, res: NextApiResponse) => {
   const token = await getToken({ req, secret })
-  console.log("JSON Web Token", token)
+  // console.log("JSON Web Token", token)
   res.end()
 }
+
+export default x;

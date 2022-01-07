@@ -24,7 +24,8 @@ export default function PageOne() {
       <Page title='Post | Ibnu Sina'>
         <Container maxWidth={themeStretch ? false : 'xl'}>
           <Grid >
-            <TablePost />
+            {/* <TablePost dataPost={post?.allPosts} /> */}
+            <TablePost dataPost={post?.allPosts!} />
           </Grid>
         </Container>
       </Page>
