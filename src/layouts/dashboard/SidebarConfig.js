@@ -1,5 +1,5 @@
 // routes
-import { PATH_DASHBOARD } from "../../routes/paths";
+import { PATH_WM } from "../../routes/paths";
 // components
 import SvgIconStyle from "../../components/SvgIconStyle";
 
@@ -29,17 +29,17 @@ const sidebarConfig = [
     items: [
       {
         title: "post",
-        path: PATH_DASHBOARD.general.post,
+        path: PATH_WM.general.post,
         icon: ICONS.dashboard,
       },
       {
         title: "page",
-        path: PATH_DASHBOARD.general.page,
+        path: PATH_WM.general.page,
         icon: ICONS.analytics,
       },
       {
         title: "media",
-        path: PATH_DASHBOARD.general.media,
+        path: PATH_WM.general.media,
         icon: ICONS.analytics,
       }
     ],
@@ -52,11 +52,11 @@ const sidebarConfig = [
     items: [
       {
         title: "Users",
-        path: PATH_DASHBOARD.users.root,
+        path: PATH_WM.users.root,
         icon: ICONS.user,
           children: [
-            { title: "All User", path: PATH_DASHBOARD.users.allUsers },
-            { title: "New User", path: PATH_DASHBOARD.users.newUser },
+            { title: "All User", path: PATH_WM.users.allUsers },
+            { title: "New User", path: PATH_WM.users.newUser },
           ]
       },
       // {

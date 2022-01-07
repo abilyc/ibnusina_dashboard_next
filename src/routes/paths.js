@@ -4,26 +4,22 @@ function path(root, sublink) {
   return `${root}${sublink}`;
 }
 
-const ROOTS_DASHBOARD = "";
+// const ROOTS_DASHBOARD = "";
+const ROOTS_USER = "/wm/user";
+const ROOTS_WM = "/wm";
 
 // ----------------------------------------------------------------------
 
-const PATH_DASHBOARD = {
-  root: ROOTS_DASHBOARD,
+export const PATH_WM = {
+  root: ROOTS_WM,
   general: {
-    post: path(ROOTS_DASHBOARD, "/post"),
-    page: path(ROOTS_DASHBOARD, "/page"),
-    media: path(ROOTS_DASHBOARD, "/media")
-  },
+    post: path(ROOTS_WM, "/post"),
+    page: path(ROOTS_WM, "/page"),
+    media: path(ROOTS_WM, "/media")
+  }, 
   users: {
-    root: path(ROOTS_DASHBOARD, "/user"),
-    // userHome: path(ROOTS_DASHBOARD, "/user/"),
-    allUsers: path(ROOTS_DASHBOARD, "/user/allUsers"),
-    newUser: path(ROOTS_DASHBOARD, "/user/addUser"),
-    // forms: path(ROOTS_DASHBOARD, "form"),
-    // newForm: path(ROOTS_DASHBOARD, "form/addForm"),
+    root: ROOTS_USER,
+    allUsers: path(ROOTS_USER, "/allUsers"),
+    newUser: path(ROOTS_USER, "/addUser"),
   }
 };
-
-
-export {PATH_DASHBOARD};
