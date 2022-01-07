@@ -4,6 +4,7 @@ import { sentenceCase } from 'change-case';
 import Image from 'src/components/Image';
 import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
+import React from 'react';
 import {
   Box,
   Card,
@@ -26,6 +27,7 @@ import Iconify from 'src/components/Iconify';
 import Scrollbar from 'src/components/Scrollbar';
 import MenuPopover from 'src/components/MenuPopover';
 import { PostList } from 'types/post';
+import LineEditor from './LIneEditor';
 
 const _appInvoices = [...Array(5)].map((_, index) => ({
   id: `${Date.now() + index}`,
@@ -51,12 +53,12 @@ const ItemIconStyle = styled(Iconify)(({ theme }) => ({
   color: theme.palette.text.disabled,
 }));
 
-function convertToString(arr:any){
-  const x = arr.map((a: { title: string; }) => " "+ a.title);
+function convertToString(arr: any) {
+  const x = arr.map((a: { title: string; }) => " " + a.title);
   return x.toString();
 }
 // export default function PostTable(dataPost:{dataPost:PostList | undefined}) {
-export default function PostTable({ dataPost }: { dataPost: PostList}) {
+export default function PostTable({ dataPost }: { dataPost: PostList }) {
   const theme = useTheme();
   const arrayPost = dataPost?.postResult!;
   // console.log(arrayPost);
@@ -80,9 +82,8 @@ export default function PostTable({ dataPost }: { dataPost: PostList}) {
             </TableHead>
             <TableBody>
               {arrayPost.map((row) => (
-                <>
-                  <TableRow key={row.id}>
-                    {/* <TableCell>{`INV-${row.id}`}</TableCell> */}
+                <React.Fragment key={row.id}>
+                  <TableRow>
                     <TableCell>
                       <ItemBlockStyle sx={{ minWidth: 120 }}>
                         <Image disabledEffect ratio={undefined} alt={'amir'} src='https://minimal-assets-api.vercel.app/assets/icons/ic_flag_us.svg' sx={{ width: 28, mr: 1 }} />
@@ -91,18 +92,15 @@ export default function PostTable({ dataPost }: { dataPost: PostList}) {
                     </TableCell>
                     <TableCell>{row.author.callName}</TableCell>
                     <TableCell>{convertToString(row.category)}</TableCell>
-                    {/* <TableCell>{fCurrency(row.price)}</TableCell> */}
                     <TableCell>{convertToString(row.tag)}</TableCell>
                     <TableCell>
                       <Label
                         variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                        color={
-                          (row.published === 1 && 'warning') ||
+                        color={(row.published === 1 && 'warning') ||
                           (row.published === 3 && 'error') ||
-                          'success'
-                        }
+                          'success'}
                       >
-                        {row.published===2 ? 'terbit': 'draft'}
+                        {row.published === 2 ? 'terbit' : 'draft'}
                       </Label>
                     </TableCell>
 
@@ -110,19 +108,12 @@ export default function PostTable({ dataPost }: { dataPost: PostList}) {
                       <MoreMenuButton />
                     </TableCell>
                   </TableRow>
-                  {/* <Box sx={{ margin: 1 }}>
-                    <Table size="small" aria-label="purchases">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Date</TableCell>
-                          <TableCell>Customer</TableCell>
-                          <TableCell align="right">Amount</TableCell>
-                          <TableCell align="right">Total price ($)</TableCell>
-                        </TableRow>
-                      </TableHead>
-                    </Table>
-                  </Box> */}
-                </>
+                  <TableRow>
+                    <TableCell>
+                      <LineEditor />
+                    </TableCell>
+                  </TableRow>
+                </React.Fragment>
               ))}
             </TableBody>
           </Table>

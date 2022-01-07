@@ -11,7 +11,7 @@ export default function PageOne() {
   const { data: session, status } = useSession();
   if (status === "loading") return <div>tunggu sedang memuat</div>
   if (!session) return <Login />
-  if (session.active !== 2) return <StaffOnly/>
+  if (session.active !== 2 || session.role === 'guest') return <StaffOnly/>
   return (
     <Container maxWidth={themeStretch ? false : 'xl'}>
       <NextLink href='/wm/post'>

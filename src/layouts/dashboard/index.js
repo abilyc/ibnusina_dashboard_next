@@ -48,10 +48,7 @@ export default function DashboardLayout({ children }) {
   const { data: session, status } = useSession();
   if (status === "loading") return <div>tunggu sedang memuat</div>
   if (!session) return <Login />
-  // console.log(session.active, session.callName);
-  if (session.active !== 2) return <StaffOnly/>
-  // const { myData } = useAuth();
-  // console.log(session);
+  if (session.active !== 2 || session.role === 'guest') return <StaffOnly/>
 
   return (
     <RootStyle>

@@ -13,10 +13,16 @@ import { useSession } from 'next-auth/react'
 
 export default function PageOne() {
   const { themeStretch } = useSettings();
+  let publishedStatus;
   const { data: session, status } = useSession();
-  const { post, isLoading, isError } = usePost({token: session?.token, published: 3, timeStamp: ''});
+  if (session?.role === 'admin' || session?.role === 'editor' ){
+    publishedStatus = 3;
+  }else{
+    publishedStatus = 2;
+  }
+  const { post, isLoading, isError } = usePost({token: session?.token, published: publishedStatus, timeStamp: ''});
   if (isLoading) return <div>sedang memuat</div>
-  if(isError) return <div>terjadi error</div>
+  if(isError) return <div>terjadi error {console.log(isError)} </div>
   // console.log(post);
 
   return (

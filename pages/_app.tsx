@@ -57,7 +57,7 @@ export default function MyApp({
                                     </NoSsr>
                                     <GlobalStyles />
                                     <ProgressBar />
-                                    <LoadingScreen />
+                                    {/* <LoadingScreen /> */}
                                     {
 
                                         router.pathname.startsWith('/dashboard') ?

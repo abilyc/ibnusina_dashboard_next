@@ -1,8 +1,3 @@
-// export interface DataSession {
-//     data: Session;
-//     status: string;
-// }
-
 export interface Session {
     id: string;
     token: string;
