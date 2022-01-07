@@ -8,7 +8,7 @@ import useCollapseDrawer from '../../hooks/useCollapseDrawer';
 //
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
-import {Login} from '../../components/login'
+import { Login, StaffOnly } from '../../components/login';
 // import { useAuth } from 'src/db/auth';
 
 // ----------------------------------------------------------------------
@@ -47,12 +47,15 @@ export default function DashboardLayout({ children }) {
   const [open, setOpen] = useState(false);
   const { data: session, status } = useSession();
   if (status === "loading") return <div>tunggu sedang memuat</div>
-  if (!session) return <Login/>
+  if (!session) return <Login />
+  console.log(session.active, session.callName);
+  if (session.active !== 2) return <StaffOnly/>
   // const { myData } = useAuth();
+  // console.log(session);
 
   return (
     <RootStyle>
-      <DashboardNavbar onOpenSidebar={() => setOpen(true)} myData={session}/>
+      <DashboardNavbar onOpenSidebar={() => setOpen(true)} myData={session} />
       {/* <DashboardNavbar onOpenSidebar={() => setOpen(true)} /> */}
       <DashboardSidebar
         isOpenSidebar={open}

@@ -13,6 +13,7 @@ mutation fLogin($username:String!, $email:String!, $avatar: String){
       callName
       role
       avatar
+      active
       detail{
         createdAt
         email
@@ -53,7 +54,8 @@ export default NextAuth({
           callName: fLogin?.myData.callName,
           email: profile.email,
           avatar: fLogin?.myData.avatar,
-          role: fLogin?.myData.role
+          role: fLogin?.myData.role,
+          active: fLogin?.myData.active
         }
       },
     })
@@ -89,6 +91,7 @@ export default NextAuth({
         token.c = x && x?.callName;
         token.d = x && x?.avatar;
         token.e = x && x?.role;
+        token.f = x && x?.active;
       }
       return await token;
     },
@@ -99,6 +102,7 @@ export default NextAuth({
         session.callName = await token?.c;
         session.avatar = await token?.d;
         session.role = await token?.e;
+        session.active = await token?.f;
       }
       return session
     }
