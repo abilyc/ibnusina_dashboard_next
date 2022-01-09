@@ -1,4 +1,4 @@
-import { Container, Typography, Grid } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 // layouts
 import DashboardLayout from 'src/layouts/dashboard';
 // hooks
@@ -14,7 +14,7 @@ import { showError } from 'lib/showError';
 
 export default function PageOne() {
   const { themeStretch } = useSettings();
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const publishedStatus = session?.role === 'admin' || session?.role === 'editor' ? 3 : 2;
   const { post, isLoading, isError } = usePost({ token: session?.token, published: publishedStatus, timeStamp: '' });
   const loadComponent = isLoading && <div>sedang memuat</div>;
