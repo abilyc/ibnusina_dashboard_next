@@ -14,13 +14,8 @@ import { showError } from 'lib/showError';
 
 export default function PageOne() {
   const { themeStretch } = useSettings();
-  let publishedStatus;
   const { data: session, status } = useSession();
-  if (session?.role === 'admin' || session?.role === 'editor') {
-    publishedStatus = 3;
-  } else {
-    publishedStatus = 2;
-  }
+  const publishedStatus = session?.role === 'admin' || session?.role === 'editor' ? 3 : 2;
   const { post, isLoading, isError } = usePost({ token: session?.token, published: publishedStatus, timeStamp: '' });
   const loadComponent = isLoading && <div>sedang memuat</div>;
   const errComponent = isError && <div>terjadi error {showError(isError)} </div>

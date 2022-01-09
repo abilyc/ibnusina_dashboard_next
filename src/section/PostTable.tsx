@@ -70,70 +70,70 @@ export default function PostTable({ dataPost }: { dataPost: PostList }) {
   }
   return (
     <>
-      {fullEdit ? <FullEdit/>:
+      {fullEdit ? <FullEdit /> :
         <Card>
-        <CardHeader title="Post" sx={{ mb: 3 }} />
-        <Scrollbar sx={undefined}>
-          <TableContainer sx={{ minWidth: 720 }}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Judul</TableCell>
-                  <TableCell>Penulis</TableCell>
-                  <TableCell>Kategori</TableCell>
-                  <TableCell>Tag</TableCell>
-                  <TableCell>Status</TableCell>
-                  <TableCell />
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {arrayPost.map((row) => (
-                  <React.Fragment key={row.id}>
-                    <TableRow>
-                      <TableCell>{row.title}</TableCell>
-                      <TableCell>
-                        <ItemBlockStyle sx={{ minWidth: 120 }}>
-                          <Image disabledEffect ratio={undefined} alt={row.author.callName} src={row.author.avatar} sx={{ width: 28, mr: 1 }} />
-                          <Typography variant="subtitle2">{capitalCase(row.author.callName)}</Typography>
-                        </ItemBlockStyle>
-                      </TableCell>
-                      <TableCell>{convertToString(row.category)}</TableCell>
-                      <TableCell>{convertToString(row.tag)}</TableCell>
-                      <TableCell>
-                        <Label
-                          variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                          color={(row.published === 1 && 'warning') ||
-                            (row.published === 2 && 'success') ||
-                            'error'}
-                        >
-                          {row.published === 2 && 'terbit' || row.published === 1 && 'draft' || 'error'}
-                        </Label>
-                      </TableCell>
+          <CardHeader title="Post" sx={{ mb: 3 }} />
+          <Scrollbar sx={undefined}>
+            <TableContainer sx={{ minWidth: 720 }}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Judul</TableCell>
+                    <TableCell>Penulis</TableCell>
+                    <TableCell>Kategori</TableCell>
+                    <TableCell>Tag</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell />
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {arrayPost.map((row) => (
+                    <React.Fragment key={row.id}>
+                      <TableRow>
+                        <TableCell>{row.title}</TableCell>
+                        <TableCell>
+                          <ItemBlockStyle sx={{ minWidth: 120 }}>
+                            <Image disabledEffect ratio={undefined} alt={row.author.callName} src={row.author.avatar} sx={{ width: 28, mr: 1 }} />
+                            <Typography variant="subtitle2">{capitalCase(row.author.callName)}</Typography>
+                          </ItemBlockStyle>
+                        </TableCell>
+                        <TableCell>{convertToString(row.category)}</TableCell>
+                        <TableCell>{convertToString(row.tag)}</TableCell>
+                        <TableCell>
+                          <Label
+                            variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
+                            color={(row.published === 1 && 'warning') ||
+                              (row.published === 2 && 'success') ||
+                              'error'}
+                          >
+                            {row.published === 2 && 'terbit' || row.published === 1 && 'draft' || 'error'}
+                          </Label>
+                        </TableCell>
 
-                      <TableCell align="right">
-                        <MoreMenuButton isPublished={row.published} handleButton={handleButton} id={row.id} />
-                      </TableCell>
-                    </TableRow>
-                    {editThis === row.id && <TableRow>
-                      <TableCell>
-                        <QuickEditor />
-                      </TableCell>
-                    </TableRow>}
-                  </React.Fragment>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Scrollbar>
+                        <TableCell align="right">
+                          <MoreMenuButton isPublished={row.published} handleButton={handleButton} id={row.id} />
+                        </TableCell>
+                      </TableRow>
+                      {editThis === row.id && <TableRow>
+                        <TableCell>
+                          <QuickEditor />
+                        </TableCell>
+                      </TableRow>}
+                    </React.Fragment>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Scrollbar>
 
-        <Divider />
+          <Divider />
 
-        <Box sx={{ p: 2, textAlign: 'right' }}>
-          <Button size="small" color="inherit" endIcon={<Iconify icon={'eva:arrow-ios-forward-fill'} sx={undefined} />}>
-            View All
-          </Button>
-        </Box>
-      </Card>}
+          <Box sx={{ p: 2, textAlign: 'right' }}>
+            <Button size="small" color="inherit" endIcon={<Iconify icon={'eva:arrow-ios-forward-fill'} sx={undefined} />}>
+              View All
+            </Button>
+          </Box>
+        </Card>}
     </>
   );
 }
