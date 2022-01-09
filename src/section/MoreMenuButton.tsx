@@ -7,8 +7,10 @@ import {
 } from '@mui/material';
 import Iconify from 'src/components/Iconify';
 import MenuPopover from 'src/components/MenuPopover';
+import {ActionButton} from 'types/post';
 
-function MoreMenuButton({ isPublished, handleButton, id }: { isPublished: number, handleButton: any, id: string }) {
+function MoreMenuButton(props: ActionButton) {
+    const { isPublished, handleButton, id } = props;
     const [open, setOpen] = useState(null);
 
     const handleOpen = (event: { currentTarget: any }) => {
@@ -20,7 +22,7 @@ function MoreMenuButton({ isPublished, handleButton, id }: { isPublished: number
     };
 
     const handleMenuButton = (event: string) => {
-        handleButton(event +"<->"+ id);
+        handleButton(event +"<->"+ id+"<->"+isPublished);
         setOpen(null);
     }
 

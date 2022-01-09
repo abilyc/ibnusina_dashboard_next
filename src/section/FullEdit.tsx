@@ -7,6 +7,7 @@ import {
   Card,
   Stack,
   Container,
+  Button,
   Typography,
   CardHeader,
   CardContent,
@@ -21,7 +22,7 @@ import Page from 'src/components/Page';
 
 // ----------------------------------------------------------------------
 
-function FullEdit() {
+function FullEdit({cancelButton}:{cancelButton:any}) {
   const { themeStretch } = useSettings();
   // const [quillContent, setQuillContent] = useState('');
   // const [draftContent, setDraftContent] = useState(() =>
@@ -34,7 +35,7 @@ function FullEdit() {
       <Page title='Page Three | Minimal-UI'>
         <Container maxWidth={themeStretch ? false : 'xl'}>
           <Typography variant='h3' component='h1' sx={{ mb: 5 }}>
-            Demo editor for next js
+            Editor <Button onClick ={cancelButton}>Kembali</Button> 
           </Typography>
 
           {/* <Grid container spacing={3} sx={{ mb: 5 }}>
