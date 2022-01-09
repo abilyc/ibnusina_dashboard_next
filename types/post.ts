@@ -19,8 +19,15 @@ export interface PostList {
         author: {
             callName: string
             avatar: string
+            role: string
         }
         category: string[]
-        tag:string[]
+        tag: string[]
     }[] | undefined
+}
+
+export interface ActionButton {
+    id: string;
+    isPublished: number;
+    handleButton: any;
 }

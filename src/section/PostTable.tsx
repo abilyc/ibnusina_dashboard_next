@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { capitalCase } from 'change-case';
 // @mui
 import Image from 'src/components/Image';
@@ -13,6 +13,7 @@ import {
   Divider,
   TableRow,
   TableBody,
+  Avatar,
   TableCell,
   TableHead,
   CardHeader,
@@ -27,6 +28,7 @@ import { PostList } from 'types/post';
 import QuickEditor from './QuickEditor';
 import FullEdit from './FullEdit';
 import MoreMenuButton from './MoreMenuButton';
+import FormatDate from 'lib/fromatDate';
 
 // ----------------------------------------------------------------------
 
@@ -48,29 +50,32 @@ function convertToString(arr: any) {
 }
 
 export default function PostTable({ dataPost }: { dataPost: PostList }) {
-  const [editThis, setEditThis] = useState();
+  const [editThis, setEditThis] = useState('');
   const [message, setMessage] = useState('');
   const [fullEdit, setFullEdit] = useState(false);
   const theme = useTheme();
   const arrayPost = dataPost?.postResult!;
-  const handleButton = (e: any) => {
-    const arr = e.split('<->');
+  const handleButton = (e: string) => {
+    const arr: string[] = e.split('<->');
+    const publishOrDraft = arr[2] === '2' ? 'Simpan ke draft' : 'Terbitkan postingan ini';
+    const postId = arr[1];
     if (arr[0] === 'fe') {
       setFullEdit(true);
-      setEditThis(undefined);
+      setEditThis('');
     } else {
-      if (arr[0] === 'qe') setMessage('Pilih item yang akan diedit');
-      if (arr[0] === 'del') setMessage('Anda akan menghapus postingan ini');
-      if (arr[0] === 'pi') setMessage('Anda akan menerbitkan postingan ini');
-      setEditThis(arr[1]);
+      if (arr[0] === 'qe') setMessage('qe-Pilih item yang akan diedit');
+      if (arr[0] === 'dl') setMessage('dl-Anda akan menghapus postingan');
+      if (arr[0] === 'pi') setMessage(`pi-${publishOrDraft}`);
+      setEditThis(postId);
     }
   }
-  const cancelEdit = (e: any) => {
-    setEditThis(undefined);
+  const cancelEdit = () => {
+    setEditThis('');
+    setFullEdit(false);
   }
   return (
     <>
-      {fullEdit ? <FullEdit /> :
+      {fullEdit ? <FullEdit cancelButton={cancelEdit} /> :
         <Card>
           <CardHeader title="Post" sx={{ mb: 3 }} />
           <Scrollbar sx={undefined}>
@@ -78,6 +83,7 @@ export default function PostTable({ dataPost }: { dataPost: PostList }) {
               <Table>
                 <TableHead>
                   <TableRow>
+                    <TableCell>Cover</TableCell>
                     <TableCell>Judul</TableCell>
                     <TableCell>Penulis</TableCell>
                     <TableCell>Kategori</TableCell>
@@ -87,36 +93,58 @@ export default function PostTable({ dataPost }: { dataPost: PostList }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {arrayPost.map((row) => (
-                    <React.Fragment key={row.id}>
+                  {arrayPost.map((post) => (
+                    <React.Fragment key={post.id}>
                       <TableRow>
-                        <TableCell>{row.title}</TableCell>
                         <TableCell>
-                          <ItemBlockStyle sx={{ minWidth: 120 }}>
-                            <Image disabledEffect ratio={undefined} alt={row.author.callName} src={row.author.avatar} sx={{ width: 28, mr: 1 }} />
-                            <Typography variant="subtitle2">{capitalCase(row.author.callName)}</Typography>
-                          </ItemBlockStyle>
+                          <Image ratio={undefined} src={post.imageUrl} alt="cover image" sx={{ maxWidth: 28 }} />
                         </TableCell>
-                        <TableCell>{convertToString(row.category)}</TableCell>
-                        <TableCell>{convertToString(row.tag)}</TableCell>
+                        <TableCell>
+                          {/* {post.title} */}
+                          <Box sx={{ display: 'flex', alignItems: 'left' }}>
+                            <Box sx={{ ml: 2 }}>
+                              <Typography variant="subtitle2"> {post.title}</Typography>
+                              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                                {FormatDate(post.createdAt)}
+                              </Typography>
+                            </Box>
+                          </Box>
+                        </TableCell>
+                        <TableCell>
+                          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Avatar alt={post.author.callName} src={post.author.avatar} />
+                            <Box sx={{ ml: 2 }}>
+                              <Typography variant="subtitle2"> {capitalCase(post.author.callName)}</Typography>
+                              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                                {post.author.role}
+                              </Typography>
+                            </Box>
+                          </Box>
+                        </TableCell>
+                        <TableCell>{convertToString(post.category)}</TableCell>
+                        <TableCell>{convertToString(post.tag)}</TableCell>
                         <TableCell>
                           <Label
                             variant={theme.palette.mode === 'light' ? 'ghost' : 'filled'}
-                            color={(row.published === 1 && 'warning') ||
-                              (row.published === 2 && 'success') ||
+                            color={(post.published === 1 && 'warning') ||
+                              (post.published === 2 && 'success') ||
                               'error'}
                           >
-                            {row.published === 2 && 'terbit' || row.published === 1 && 'draft' || 'error'}
+                            {post.published === 2 && 'terbit' || post.published === 1 && 'draft' || 'error'}
                           </Label>
                         </TableCell>
 
                         <TableCell align="right">
-                          <MoreMenuButton isPublished={row.published} handleButton={handleButton} id={row.id} />
+                          <MoreMenuButton
+                            isPublished={post.published}
+                            handleButton={handleButton}
+                            id={post.id}
+                          />
                         </TableCell>
                       </TableRow>
-                      {editThis === row.id && <TableRow>
-                        <TableCell>
-                          <QuickEditor />
+                      {editThis === post.id && <TableRow>
+                        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                          <QuickEditor message={message} cancelEdit={cancelEdit} />
                         </TableCell>
                       </TableRow>}
                     </React.Fragment>
