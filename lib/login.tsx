@@ -17,7 +17,9 @@ export function Login({ getLogin }: { getLogin: any }) {
         getLogin(e);
 
     }
-    const theUrl = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://ibnusina-dev.vercel.app';
+    const devAuthUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL_DEV;
+    const prodAuthUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL_PROD; 
+    const theUrl = process.env.NODE_ENV !== 'production' ? devAuthUrl : prodAuthUrl;
     return (
         <>
             {
