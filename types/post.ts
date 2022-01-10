@@ -17,6 +17,7 @@ export interface PostList {
         published: number
         imageUrl: string
         author: {
+            id: string
             callName: string
             avatar: string
             role: string
@@ -24,6 +25,21 @@ export interface PostList {
         category: string[]
         tag: string[]
     }[] | undefined
+}
+
+export interface PostData {
+    id: string
+    title: string
+    createdAt: string
+    slug: string
+    published: number
+    imageUrl: string
+    author: {
+        id: string
+        callName: string
+    }
+    category: string[]
+    tag: string[]
 }
 
 export interface ActionButton {

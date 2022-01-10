@@ -21,6 +21,7 @@ query allPosts($published:Int!, $timeStamp:String){
         title
       }
       author{
+        id
         callName
         avatar
         role

@@ -144,7 +144,7 @@ export default function PostTable({ dataPost }: { dataPost: PostList }) {
                       </TableRow>
                       {editThis === post.id && <TableRow>
                         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                          <QuickEditor message={message} cancelEdit={cancelEdit} />
+                          <QuickEditor message={message} cancelEdit={cancelEdit} postData={post} />
                         </TableCell>
                       </TableRow>}
                     </React.Fragment>
