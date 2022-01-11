@@ -7,24 +7,27 @@ import editComment from './editComment';
 import deleteComment from './deleteComment';
 import actionToPost from './actionToPost';
 import postListAll from './postListAll';
+import quicUpdatePost from './quickUpdatePost';
 
 const headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'authorization': 'Bearear token'
-  };
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'authorization': 'Bearear token'
+};
 
 const url = process.env.NEXT_PUBLIC_GRAPH_URL!;
+
 export {
-    postList, 
-    postListAll,
-    postContent, 
-    metaPost,
-    getComment,  
-    actionToPost,
-    headers, 
-    url,
-    addComment,
-    editComment,
-    deleteComment
-  };
+  postList,
+  postListAll,
+  postContent,
+  metaPost,
+  getComment,
+  actionToPost,
+  headers,
+  url,
+  addComment,
+  editComment,
+  deleteComment,
+  quicUpdatePost
+};

@@ -14,17 +14,15 @@ import { showError } from 'lib/showError';
 
 export default function PageOne() {
   const { themeStretch } = useSettings();
-  const { data: session } = useSession();
-  const publishedStatus = session?.role === 'admin' || session?.role === 'editor' ? 3 : 2;
-  const { post, isLoading, isError } = usePost({ token: session?.token, published: publishedStatus, timeStamp: '' });
-  const loadComponent = isLoading && <div>sedang memuat</div>;
+  const { post, isLoading, isError, isValidating } = usePost({timeStamp: '' });
+  const loadComponent = (isLoading || isValidating ) && <div>sedang memuat</div>;
   const errComponent = isError && <div>terjadi error {showError(isError)} </div>
   return (
     <DashboardLayout>
       <Page title='Post | Ibnu Sina'>
         <Container maxWidth={themeStretch ? false : 'xl'}>
           <Grid >
-            {loadComponent || errComponent || <TablePost dataPost={post?.allPosts!} />}
+            {loadComponent || errComponent || <TablePost dataPost={post?.allPosts!}/>}
           </Grid>
         </Container>
       </Page>

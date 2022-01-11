@@ -1,7 +1,9 @@
 import { GraphQLClient } from 'graphql-request';
-import { postList, postContent, postListAll } from '../query';
-// const url = process.env.GRAPH_URL!;
+import { postList, postContent, postListAll, quicUpdatePost as quickUpdate } from '../query';
+// import { getSession } from 'next-auth/react';
+import getToken from 'src/auth/getToken';
 const url = process.env.NEXT_PUBLIC_GRAPH_URL!;
+
 
 export async function fetchPostList() {
   const headers = {
@@ -13,11 +15,12 @@ export async function fetchPostList() {
 }
 export async function fetchPostListAll(token: string, published: number, timeStamp: string) {
   console.log('hi dari fetchPostListAll');
+  // const token:string = await getToken();
   const headers = {
     Authorization: token
   }
   const client = new GraphQLClient(url);
-  const res = await client.request(postListAll, {published, timeStamp}, headers);
+  const res = await client.request(postListAll, { published, timeStamp }, headers);
   // console.log('dari fetchpost list', res);
   // console.log('ini', res);
   return res;
@@ -44,4 +47,12 @@ export async function fetchAllPostId() {
       }
     }
   })
+}
+
+export async function quickUpdatePost(token:string, toEdit: string, postId: string, changeTo: string ) {
+  // const token:string = await getToken();
+  const headers = {Authorization: token};
+  const client = new GraphQLClient(url);
+  const res = await client.request(quickUpdate, { edit:toEdit, postId, changeTo }, headers);
+  return res;
 }

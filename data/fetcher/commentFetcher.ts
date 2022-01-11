@@ -14,8 +14,8 @@ export async function fetchComment(postId: string,
     }
     const client = new GraphQLClient(url);
     const res = await client.request(getComment, { postId, next, isParent, commentParentId, limit }, headers);
-    const data = await res;
-    return data;
+    // const data = await res;
+    return res;
 }
 
 export async function addCommentToList({ postId, content, parentUserId, parentCommentId, token }:{

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { capitalCase } from 'change-case';
 // @mui
 import Image from 'src/components/Image';
@@ -31,18 +31,6 @@ import MoreMenuButton from './MoreMenuButton';
 import FormatDate from 'lib/fromatDate';
 
 // ----------------------------------------------------------------------
-
-const ItemBlockStyle = styled((props) => <Stack direction="row" alignItems="center" {...props} />)({
-  minWidth: 72,
-  flex: '1 1',
-});
-
-const ItemIconStyle = styled(Iconify)(({ theme }) => ({
-  width: 16,
-  height: 16,
-  marginRight: theme.spacing(0.5),
-  color: theme.palette.text.disabled,
-}));
 
 function convertToString(arr: any) {
   const x = arr.map((a: { title: string; }) => " " + a.title);
@@ -144,7 +132,12 @@ export default function PostTable({ dataPost }: { dataPost: PostList }) {
                       </TableRow>
                       {editThis === post.id && <TableRow>
                         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                          <QuickEditor message={message} cancelEdit={cancelEdit} postData={post} />
+                          <QuickEditor
+                            message={message}
+                            cancelEdit={cancelEdit}
+                            postData={post}
+                            postList={dataPost}
+                          />
                         </TableCell>
                       </TableRow>}
                     </React.Fragment>

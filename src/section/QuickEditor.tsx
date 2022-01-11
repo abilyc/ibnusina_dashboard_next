@@ -4,10 +4,9 @@ import {
     Typography,
 } from '@mui/material';
 import EditorElement from './EditorElement';
-import {PostData} from 'types/post'
+import { PostData, PostList } from 'types/post'
 
-function QuickEditor(props: { message: string, cancelEdit: any, postData: PostData }) {
-    // const {id, title, createdAt, slug, published, imageUrl, author, category, tag } = props.postData;
+function QuickEditor(props: { message: string, cancelEdit: any, postData: PostData, postList: PostList }) {
     const msg = props.message.split('-');
     const code = msg[0];
     const txt = msg[1];
@@ -20,8 +19,7 @@ function QuickEditor(props: { message: string, cancelEdit: any, postData: PostDa
                     <Button onClick={props.cancelEdit}>batal</Button>
                 </Typography> :
                 <>
-                    {/* <Typography variant='inherit'>{txt}<Button onClick={props.cancelEdit}>batal</Button></Typography> */}
-                    <EditorElement data={props.postData} cancel={props.cancelEdit}/>
+                    <EditorElement data={props.postData} cancel={props.cancelEdit} postList={props.postList} />
                 </>
             }
 
