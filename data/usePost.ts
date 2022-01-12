@@ -42,17 +42,21 @@ export function quickUpdatePost(params: {
     const token = session?.token;
     const published = session?.role === 'admin' || session?.role === 'editor' ? 3 : 2;
     const timeStamp = '';
-    console.log('save:', save);
+    // console.log('save:', save);
     const { error, data } = useSWR<{ quickUpdatePost: number }>(save ? [token, toEdit, postId, changeTo] : null, quickUpdate);
     if (error) showError(error);
-    if (data) {
+    if (data?.quickUpdatePost=== 1) {
         const { mutate } = useSWRConfig();
         mutate([token, published, timeStamp], async () => {
+            function changeThis(field:string, val:string){
+                const d = toEdit === field ? changeTo: val;
+                return d; 
+            }
             const updatedData = cacheData.postResult && cacheData.postResult.map(x => (x.id === postId ?
                 {
                     id: x.id,
-                    title: changeTo,
-                    createdAt: x.createdAt,
+                    title: changeThis('TITLE', x.title),
+                    createdAt: changeThis('DATE', x.createdAt),
                     slug: x.slug,
                     published: x.published,
                     imageUrl: x.imageUrl,
@@ -71,7 +75,7 @@ export function quickUpdatePost(params: {
     }
 
     return {
-        updateData: data?.quickUpdatePost && true,
+        updateData: data?.quickUpdatePost ===1 && true,
         // isLoading: !error && !data && true,
         // isError: error && true
     }
