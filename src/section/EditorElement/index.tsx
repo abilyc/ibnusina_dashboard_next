@@ -45,8 +45,6 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
   // untuk transisi tab dan reset input 
   const switchTab = (_: any, tabNumber: any) => {
     setValue(tabNumber);
-    // if (newValue === '1') setEditThis('TITLE');
-    // if (newValue === '2') setEditThis('DATE');
     switch (tabNumber) {
       case '1':
         setEditThis('TITLE');
@@ -60,7 +58,7 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
         setEditThis('AUTHOR');
         setInputValue(author.id); // harus 'refetch' atau membuat query baru, agar bisa menampilkan callName dan avatar nya 
         break;
-        case '4':
+      case '4':
         setEditThis('CATEGORY');
         setInputValue(category);
         break;
@@ -70,14 +68,14 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
         break;
       case '6':
         setEditThis('SUMMARY');
-        setInputValue(category);
+        setInputValue(undefined); // sementara belum ada 
         break;
       default:
         setInputValue(undefined);
         break;
     }
   };
- 
+
   // handle input for update 
   const handleInput = (event: any) => {
     const val = !event.target ? event : event.target.value;

@@ -1,7 +1,11 @@
 import { useSWRConfig } from "swr";
 import { PostList, PostData } from "types/post";
 
-function updatePostListCache(token: string | any, postId: string, published: number, timeStamp: string, toEdit: string, changeTo: any, cacheData: PostList) {
+function updatePostListCache(
+    token: string | undefined, postId: string,
+    published: number, timeStamp: string,
+    toEdit: string, changeTo: any, cacheData: PostList
+) {
     const { mutate } = useSWRConfig();
     mutate([token, published, timeStamp], async () => {
         function changeThis(field: string, val: string | number | string[] | object) {

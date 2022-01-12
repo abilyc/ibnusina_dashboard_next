@@ -40,7 +40,7 @@ export function quickUpdatePost(params: {
 }) {
     const { save, cacheData, toEdit, postId, changeTo } = params;
     const { data: session } = useSession();
-    const token = session?.token;
+    const token:any = session && session.token!;
     const published = session?.role === 'admin' || session?.role === 'editor' ? 3 : 2;
     const timeStamp = '';
     const { error, data } = useSWR<{ quickUpdatePost: number }>(save ? [token, toEdit, postId, changeTo] : null, quickUpdate);
