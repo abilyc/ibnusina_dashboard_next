@@ -1,10 +1,11 @@
-import useSWR, { useSWRConfig } from "swr";
+import useSWR from "swr";
 import useSWRImmutable from 'swr/immutable';
 import { fetchPostListAll, quickUpdatePost as quickUpdate } from "./fetcher/postFetcher";
 import { PostList } from "types/post";
 import { useSession } from 'next-auth/react';
 import { showError } from "lib/showError";
-import { useState, useEffect } from 'react';
+import updatePostListCache from "./updatePostListCache";
+// import { useState, useEffect } from 'react';
 
 export function usePost(p: { timeStamp: string }) {
     const { data: session } = useSession();
@@ -35,49 +36,15 @@ export function quickUpdatePost(params: {
     cacheData: PostList,
     toEdit: string,
     postId: string,
-    changeTo: string | undefined
+    changeTo: string | string[] | undefined
 }) {
     const { save, cacheData, toEdit, postId, changeTo } = params;
     const { data: session } = useSession();
     const token = session?.token;
     const published = session?.role === 'admin' || session?.role === 'editor' ? 3 : 2;
     const timeStamp = '';
-    // console.log('save:', save);
     const { error, data } = useSWR<{ quickUpdatePost: number }>(save ? [token, toEdit, postId, changeTo] : null, quickUpdate);
     if (error) showError(error);
-    if (data?.quickUpdatePost=== 1) {
-        const { mutate } = useSWRConfig();
-        mutate([token, published, timeStamp], async () => {
-            function changeThis(field:string, val:string){
-                const d = toEdit === field ? changeTo: val;
-                return d; 
-            }
-            const updatedData = cacheData.postResult && cacheData.postResult.map(x => (x.id === postId ?
-                {
-                    id: x.id,
-                    title: changeThis('TITLE', x.title),
-                    createdAt: changeThis('DATE', x.createdAt),
-                    slug: x.slug,
-                    published: x.published,
-                    imageUrl: x.imageUrl,
-                    author: x.author,
-                    category: x.category,
-                    tag: x.tag
-                } : x));
-            const newPostList = {
-                allPosts: {
-                    nextPost: cacheData.nextPost,
-                    postResult: updatedData
-                }
-            }
-            return newPostList;
-        }, false)
-    }
-
-    return {
-        updateData: data?.quickUpdatePost ===1 && true,
-        // isLoading: !error && !data && true,
-        // isError: error && true
-    }
-
+    if (data?.quickUpdatePost === 1) updatePostListCache(token, postId, published, timeStamp, toEdit, changeTo, cacheData);
+    return data?.quickUpdatePost === 1 && true
 }

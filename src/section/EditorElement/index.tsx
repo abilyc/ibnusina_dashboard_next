@@ -24,18 +24,15 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
   const { id, author, title, category, tag, createdAt } = props.data;
   const [value, setValue] = useState('1');
 
-  // update target and value 
+  // set target and value 
   const [editThis, setEditThis] = useState('TITLE');
-  const [inputValue, setInputValue] = useState<string | undefined>(); // untuk update judul
-  // const [inputDate, setInputDate] = useState<string | undefined>();
-
+  const [inputValue, setInputValue] = useState<string | string[] | undefined>(); // untuk update judul
   const [save, setSave] = useState(false);
 
   // data-fetching 
-  // const updateValue = editThis === 'TITLE' ? inputValue : inputDate;
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { updateData } = quickUpdatePost({
+  const updateData = quickUpdatePost({
     save, cacheData: props.postList, toEdit: editThis, postId: id, changeTo: inputValue
   });
 
@@ -46,21 +43,46 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
   }, [save, updateData]);
 
   // untuk transisi tab dan reset input 
-  const switchTab = (event: any, newValue: any) => {
-    setValue(newValue);
-    if (newValue === '1') setEditThis('TITLE');
-    if (newValue === '2') setEditThis('DATE');
-    setInputValue(undefined);
-    // setInputDate(undefined);
+  const switchTab = (_: any, tabNumber: any) => {
+    setValue(tabNumber);
+    // if (newValue === '1') setEditThis('TITLE');
+    // if (newValue === '2') setEditThis('DATE');
+    switch (tabNumber) {
+      case '1':
+        setEditThis('TITLE');
+        setInputValue(title);
+        break;
+      case '2':
+        setEditThis('DATE');
+        setInputValue(createdAt);
+        break;
+      case '3':
+        setEditThis('AUTHOR');
+        setInputValue(author.id); // harus 'refetch' atau membuat query baru, agar bisa menampilkan callName dan avatar nya 
+        break;
+        case '4':
+        setEditThis('CATEGORY');
+        setInputValue(category);
+        break;
+      case '5':
+        setEditThis('TAG');
+        setInputValue(tag);
+        break;
+      case '6':
+        setEditThis('SUMMARY');
+        setInputValue(category);
+        break;
+      default:
+        setInputValue(undefined);
+        break;
+    }
   };
-
+ 
   // handle input for update 
-  const handleInput = (event: any) => { // title
-    setInputValue(event.target.value);
-  };
-  const handleDate = (val: string) => { // date 
+  const handleInput = (event: any) => {
+    const val = !event.target ? event : event.target.value;
     setInputValue(val);
-  }
+  };
 
   // simpan perubahan
   const handleSave = () => {
@@ -112,19 +134,25 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
                   }}
                 >
                   <TabPanel value='1'>
-                    {editThis === 'TITLE' && <EditTitle
-                      handleInput={handleInput}
-                      inputValue={inputValue}
-                      title={title}
-                    />}
+                    {editThis === 'TITLE' &&
+                      <EditTitle
+                        handleInput={handleInput}
+                        // inputValue={title}
+                        title={title}
+                      />}
                   </TabPanel>
                   <TabPanel value='2'>
-                    {editThis === 'DATE' && <EditDate
-                      dateValue={createdAt}
-                      handleDate={handleDate}
-                    />}
+                    {editThis === 'DATE' &&
+                      <EditDate
+                        dateValue={createdAt}
+                        handleDate={handleInput}
+                      />}
                   </TabPanel>
-                  <TabPanel value='3'>hello</TabPanel>
+                  <TabPanel value='3'>
+                    {editThis === 'AUTHOR' &&
+                      <div>{editThis}</div>
+                    }
+                  </TabPanel>
                   <TabPanel value='4'>hello</TabPanel>
                   <TabPanel value='5'>hello</TabPanel>
                   <TabPanel value='6'>hello</TabPanel>
