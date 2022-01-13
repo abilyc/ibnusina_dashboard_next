@@ -135,7 +135,6 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
                     {editThis === 'TITLE' &&
                       <EditTitle
                         handleInput={handleInput}
-                        // inputValue={title}
                         title={title}
                       />}
                   </TabPanel>
@@ -151,9 +150,21 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
                       <div>{editThis}</div>
                     }
                   </TabPanel>
-                  <TabPanel value='4'>hello</TabPanel>
-                  <TabPanel value='5'>hello</TabPanel>
-                  <TabPanel value='6'>hello</TabPanel>
+                  <TabPanel value='4'>
+                  {editThis === 'CATEGORY' &&
+                      <div>{editThis}</div>
+                    }
+                  </TabPanel>
+                  <TabPanel value='5'>
+                  {editThis === 'TAG' &&
+                      <div>{editThis}</div>
+                    }
+                  </TabPanel>
+                  <TabPanel value='6'>
+                  {editThis === 'SUMMARY' &&
+                      <div>{editThis}</div>
+                    }
+                  </TabPanel>
                 </Box>
               </TabContext>
             </Block>
