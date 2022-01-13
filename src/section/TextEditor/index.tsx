@@ -9,10 +9,9 @@ import {
     Slate, Editable, withReact
 } from 'slate-react'
 import { withHistory } from 'slate-history'
-import { CustomElement, CustomText, ImageElement } from 'types/editor';
+import { CustomElement, CustomText, ImageElement } from 'types/editor-types';
 import CustomEditor from './CustomEditor';
-import { CodeElement, DefaultElement, Leaf, Image } from './Element';
-// import { Button, Icon, Toolbar } from './component';
+import { CodeElement, DefaultElement, Leaf, Image } from './ElementEditor';
 import imageExtensions from 'image-extensions'
 import isUrl from 'is-url'
 
@@ -27,10 +26,6 @@ declare module 'slate' {
 }
 
 function TextEditor() {
-    // const [editor] = useState(() => withReact(createEditor()));
-    // const editor = useMemo(() => withReact(createEditor()), [])
-    // const editor = useMemo(() => withHistory(withReact(createEditor())), [])
-    // const initialValue: CustomElement[] = [];
     const editor = useMemo(
         () => withImages(withHistory(withReact(createEditor()))),
         []
@@ -56,9 +51,6 @@ function TextEditor() {
                 return <CodeElement {...props} />
             case 'image':
                 return <Image {...props} />
-            //     default:
-            //         return <p {...attributes}>{children}</p>
-            // }
             default:
                 return <DefaultElement {...props} />
         }
@@ -82,13 +74,13 @@ function TextEditor() {
                 >
                     Bold
                 </button>
-                <button onMouseDown={event => {
+                {/* <button onMouseDown={event => {
                     event.preventDefault()
                     CustomEditor.toggleCodeBlock(editor)
                 }}
                 >
                     Code
-                </button>
+                </button> */}
                 <button onMouseDown={(event: any) => {
                     event.preventDefault()
                     const url = window.prompt('Enter the URL of the image:')
@@ -114,11 +106,11 @@ function TextEditor() {
 
                     switch (event.key) {
                         // When "`" is pressed, keep our existing code block logic.
-                        case '`': {
-                            event.preventDefault()
-                            CustomEditor.toggleCodeBlock(editor)
-                            break
-                        }
+                        // case '`': {
+                        //     event.preventDefault()
+                        //     CustomEditor.toggleCodeBlock(editor)
+                        //     break
+                        // }
 
                         // When "B" is pressed, bold the text in the selection.
                         case 'b': {

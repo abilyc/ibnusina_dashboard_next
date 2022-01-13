@@ -5,7 +5,7 @@ import {
     useFocused,
 } from 'slate-react'
 import { css } from '@emotion/css'
-import { Button, Icon } from './component';
+import { Button, Icon } from './ComponentEditor';
 import { Transforms } from 'slate'
 
 export const CodeElement = (props: any) => {

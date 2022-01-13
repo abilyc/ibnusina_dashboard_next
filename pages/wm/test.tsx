@@ -1,8 +1,8 @@
-import ImageEditor from 'src/section/TextEditor/ImageEditor'
+import RichTextExample from 'src/section/TextEditor/Test';
 
 export default function Test(){
     return (
-        <ImageEditor/>
+        <RichTextExample/>
     )
 }
 

@@ -11,21 +11,24 @@ import {
 // hooks
 import useSettings from 'src/hooks/useSettings';
 
+import Test from './TextEditor/Test'
+
 
 function FullEdit({ cancelButton }: { cancelButton: any }) {
   const { themeStretch } = useSettings();
   return (
-    <Container>
-      <Typography component='h3' sx={{ mb: 5 }}>
-        Update <Button onClick={cancelButton}>Kembali</Button>
-      </Typography>
-      <Card>
-        <CardHeader title='Editor' />
-        <CardContent sx={{ background: "grey", color:'black' }}>
-          <TextEditor />
-        </CardContent>
-      </Card>
-    </Container>
+    // <Container>
+    //   <Typography component='h3' sx={{ mb: 5 }}>
+    //     Update <Button onClick={cancelButton}>Kembali</Button>
+    //   </Typography>
+    //   <Card>
+    //     <CardHeader title='Editor' />
+    //     <CardContent sx={{ background: "grey", color:'black' }}>
+    //       <TextEditor />
+    //     </CardContent>
+    //   </Card>
+    // </Container>
+    <Test cancel={cancelButton}/>
   );
 }
 
