@@ -83,7 +83,7 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
   const { data } = useFetcher()
 
   const handleChange = (_: any, v: string) => {
-    setInputValue(data?.users?.filter(d=>d.callName===v)[0]['id'])
+    setInputValue(data?.users?.filter((d: any)=>d.callName===v)[0]['id'])
   }
   
 

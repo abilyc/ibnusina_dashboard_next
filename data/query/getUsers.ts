@@ -6,6 +6,7 @@ const users = gql`
             id
             callName
             avatar
+            role
         }
     }
 `

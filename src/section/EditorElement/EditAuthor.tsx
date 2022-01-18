@@ -15,7 +15,7 @@ export default function EditAuthor(props: {default: string, onChange: any}){
             freeSolo
             onChange={props.onChange}
             defaultValue={props.default}
-            options={!isLoading ?[...new Set(data?.users?.map((v: object)=>v.callName).filter((v: object)=>v!==null))] : [props.default]}
+            options={!isLoading ?[...new Set(data?.users?.map((v: any)=>v.callName).filter((v: object)=>v!==null))] : [props.default]}
             renderInput={p => <TextField {...p} label='AUTHOR'/>}
         />
     )    

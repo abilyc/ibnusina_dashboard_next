@@ -5,7 +5,6 @@ import { PostList } from "types/post";
 import { useSession } from 'next-auth/react';
 import { showError } from "lib/showError";
 import updatePostListCache from "./updatePostListCache";
-import { useUser } from "./useUser";
 // import { useState, useEffect } from 'react';
 
 export function usePost(p: { timeStamp: string }) {
@@ -46,12 +45,12 @@ export function quickUpdatePost(params: {
     const timeStamp = '';
     const { error, data } = useSWR<{ quickUpdatePost: number }>(save ? [token, toEdit, postId, changeTo] : null, quickUpdate);
     if (error) showError(error);
-    if (data?.quickUpdatePost === 1 && toEdit !== 'AUTHOR') updatePostListCache(token, postId, published, timeStamp, toEdit, changeTo, cacheData);
-    else if(data?.quickUpdatePost === 1 && toEdit === 'AUTHOR') {
-        console.log(changeTo)
-        // const { data } = useUser();
-        // const toChange = userData?.users.filter(d=>d.callName === changeTo)[0]
-        // updatePostListCache(token, postId, published, timeStamp, toEdit, toChange, cacheData);
-    }
+    if (data?.quickUpdatePost === 1) updatePostListCache(token, postId, published, timeStamp, toEdit, changeTo, cacheData);
+    // else if(data?.quickUpdatePost === 1 && toEdit === 'AUTHOR') {
+    //     console.log(changeTo)
+    //     // const { data } = useUser();
+    //     // const toChange = userData?.users.filter(d=>d.callName === changeTo)[0]
+    //     // updatePostListCache(token, postId, published, timeStamp, toEdit, toChange, cacheData);
+    // }
     return data?.quickUpdatePost === 1 && true
 }

@@ -53,6 +53,7 @@ export interface Author {
         id: string | null;
         callName: string | null;
         avatar: string | null;
+        role: string | null;
     }[]
 }
 

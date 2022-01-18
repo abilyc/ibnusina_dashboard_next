@@ -1,3 +1,4 @@
+import { useFetcher } from "src/contexts/FetcherContext";
 import { useSWRConfig } from "swr";
 import { PostList, PostData } from "types/post";
 
@@ -9,7 +10,9 @@ function updatePostListCache(
     const { mutate } = useSWRConfig();
     mutate([token, published, timeStamp], async () => {
         function changeThis(field: string, val: string | number | string[] | object) {
-            const d = toEdit === field ? changeTo : val;
+            let d = toEdit === field ? changeTo : val;
+            const { data } = useFetcher()
+            if(field === 'AUTHOR') d=data?.users.filter((v:any)=>v.id===d)[0]
             return d;
         }
         const updatedData = cacheData.postResult && cacheData.postResult.map((post: PostData) => (post.id === postId ?

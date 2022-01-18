@@ -15,7 +15,7 @@ export default function EditCategory(props: {default: string[], onChange: any}){
             freeSolo
             onChange={props.onChange}
             defaultValue={props.default}
-            options={!isLoading ?[...new Set(data?.allCategory?.map((v: object)=>v.title).filter((v: object)=>v!==null))] : [props.default]}
+            options={!isLoading ?[...new Set(data?.allCategory?.map((v: any)=>v.title).filter((v: object)=>v!==null))] : [props.default]}
             renderInput={p => <TextField {...p} label='CATEGORY'/>}
         />
     )
