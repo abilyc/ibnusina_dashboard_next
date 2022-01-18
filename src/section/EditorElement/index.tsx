@@ -11,6 +11,9 @@ import { quickUpdatePost } from 'data/usePost';
 // element editor 
 import EditTitle from './EditTitle';
 import EditDate from './EditDate';
+import EditAuthor from './EditAuthor';
+import EditCategory from './EditCategory';
+import { useFetcher } from 'src/contexts/FetcherContext';
 
 const style = {
   display: 'flex',
@@ -36,6 +39,7 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
     save, cacheData: props.postList, toEdit: editThis, postId: id, changeTo: inputValue
   });
 
+
   useEffect(() => {
     if (updateData) setSuccess(true);
     if (updateData) setSave(false);
@@ -56,7 +60,7 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
         break;
       case '3':
         setEditThis('AUTHOR');
-        setInputValue(author.id); // harus 'refetch' atau membuat query baru, agar bisa menampilkan callName dan avatar nya 
+        // setInputValue(author.id); // harus 'refetch' atau membuat query baru, agar bisa menampilkan callName dan avatar nya 
         break;
       case '4':
         setEditThis('CATEGORY');
@@ -75,6 +79,13 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
         break;
     }
   };
+
+  const { data } = useFetcher()
+
+  const handleChange = (_: any, v: string) => {
+    setInputValue(data?.users?.filter(d=>d.callName===v)[0]['id'])
+  }
+  
 
   // handle input for update 
   const handleInput = (event: any) => {
@@ -147,12 +158,18 @@ function EditorElement(props: { data: PostData, cancel: any, postList: PostList 
                   </TabPanel>
                   <TabPanel value='3'>
                     {editThis === 'AUTHOR' &&
-                      <div>{editThis}</div>
+                      <EditAuthor 
+                        default={author.callName}  
+                        onChange={handleChange}
+                      />
                     }
                   </TabPanel>
                   <TabPanel value='4'>
                   {editThis === 'CATEGORY' &&
-                      <div>{editThis}</div>
+                      <EditCategory 
+                        default={category === [] ? [''] : category}
+                        onChange={()=>{}}
+                      />
                     }
                   </TabPanel>
                   <TabPanel value='5'>

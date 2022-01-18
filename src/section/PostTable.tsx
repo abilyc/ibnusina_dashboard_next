@@ -43,6 +43,7 @@ export default function PostTable({ dataPost }: { dataPost: PostList }) {
   const [fullEdit, setFullEdit] = useState(false);
   const theme = useTheme();
   const arrayPost = dataPost?.postResult!;
+  // console.log(arrayPost)
   const handleButton = (e: string) => {
     const arr: string[] = e.split('<->');
     const publishOrDraft = arr[2] === '2' ? 'Simpan ke draft' : 'Terbitkan postingan ini';
@@ -102,7 +103,7 @@ export default function PostTable({ dataPost }: { dataPost: PostList }) {
                           <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <Avatar alt={post.author.callName} src={post.author.avatar} />
                             <Box sx={{ ml: 2 }}>
-                              <Typography variant="subtitle2"> {capitalCase(post.author.callName)}</Typography>
+                              <Typography variant="subtitle2"> {capitalCase(post.author.callName || 'undefined')}</Typography>
                               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                                 {post.author.role}
                               </Typography>

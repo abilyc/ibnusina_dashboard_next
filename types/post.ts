@@ -47,3 +47,18 @@ export interface ActionButton {
     isPublished: number;
     handleButton: any;
 }
+
+export interface Author {
+    users: {
+        id: string | null;
+        callName: string | null;
+        avatar: string | null;
+    }[]
+}
+
+export interface Category {
+    allCategory: {
+        id: string | null;
+        title: string | null;
+    }
+}

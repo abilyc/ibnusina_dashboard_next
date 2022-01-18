@@ -10,6 +10,7 @@ import TablePost from 'src/section/PostTable';
 import { usePost } from 'data/usePost';
 import { useSession } from 'next-auth/react';
 import { showError } from 'lib/showError';
+import { FetcherProvider } from 'src/contexts/FetcherContext';
 
 
 export default function PageOne() {
@@ -22,7 +23,9 @@ export default function PageOne() {
       <Page title='Post | Ibnu Sina'>
         <Container maxWidth={themeStretch ? false : 'xl'}>
           <Grid >
-            {loadComponent || errComponent || <TablePost dataPost={post?.allPosts!}/>}
+            <FetcherProvider>
+              {loadComponent || errComponent || <TablePost dataPost={post?.allPosts!}/>}
+            </FetcherProvider>
           </Grid>
         </Container>
       </Page>

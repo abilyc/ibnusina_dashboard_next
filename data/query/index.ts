@@ -8,6 +8,8 @@ import deleteComment from './deleteComment';
 import actionToPost from './actionToPost';
 import postListAll from './postListAll';
 import quicUpdatePost from './quickUpdatePost';
+import users from './getUsers';
+import category from './getCategory';
 
 const headers = {
   'Content-Type': 'application/json',
@@ -18,6 +20,7 @@ const headers = {
 const url = process.env.NEXT_PUBLIC_GRAPH_URL!;
 
 export {
+  category,
   postList,
   postListAll,
   postContent,
@@ -29,5 +32,6 @@ export {
   addComment,
   editComment,
   deleteComment,
-  quicUpdatePost
+  quicUpdatePost,
+  users
 };
